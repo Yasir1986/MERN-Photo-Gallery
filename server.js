@@ -5,19 +5,10 @@ const mongoose = require('mongoose');
 const port = 5000;
 const app = express();
 
-//const nodemailer = require('nodemailer');
-//const url = require("url");
-//const Api = require('./Api');
-//const serve = require("express-static");
-
-
 app.use(fileUpload());
 app.use(bodyParser.json())
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-
-
-//mongoose.connect("mongodb://Yasir86:Pakistan0186%40@ds263640.mlab.com:63640/students");
 
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://Yasir86:Pakistan0186%40@ds263640.mlab.com:63640/students", { useNewUrlParser: true }
@@ -43,13 +34,9 @@ const schemaModal = schema({
 });
 
 const students = mongoose.model("students", schemaModal);
-
-// serve static files for express
-//app.use(serve(__dirname + '/client/src/components'));
 app.use(express.static('component'));  
 app.use(express.static('public'));  
 
- // app.set("view engine");
 
 //CORS handling
 app.use(function(req, res, next) {
@@ -67,13 +54,10 @@ app.get("/api", (req,res) => {
 });
 
 
-
 // To insert a new student
-
 app.post("/addStudent", (req, res) => {
 
   const newStudent = new students(req.body);
-
   console.log(req.files.firstName);
 
   if (!req.files)
@@ -96,7 +80,6 @@ app.post("/addStudent", (req, res) => {
         
         newStudent.save().then(
           student => {
-         //   (req.body + req.src)
             console.log("Saved");
             console.log(JSON.stringify(student, undefined, 4));
             res.send(student);
@@ -113,34 +96,6 @@ app.post("/addStudent", (req, res) => {
   });
   
 });
-
-//Find by Id and delete from API
-
-// app.get("/:id", (req,res) =>{
- 
-//    if (Object.keys(req.params).length) {
-   
-//     students.findByIdAndRemove(req.params.id, (err, deletedStudent) => {
-      
-//       if (!deletedStudent)
-//         res.send({ error: "Error in deleting!!!", deletedStudent: null });
-    
-//       else
-//         res.send({ error: "", deletedStudent });
-//     });
-//   }
-//   else{
-      
-//       res.send({ error: "Empty Request", deletedStudent: null });
- 
-//   }
-// })
- 
-
-/*  app.get ("/details/:index" , (req, res) =>{
-  res.render("details", {student: students.data[req.params.index]})
-});
-  */
 
 
 app.listen(port, () => `Server is running on port ${port}`);
@@ -218,3 +173,30 @@ app.listen(port, () => `Server is running on port ${port}`);
 }); */
 
 
+//Find by Id and delete from API
+
+// app.get("/:id", (req,res) =>{
+ 
+//    if (Object.keys(req.params).length) {
+   
+//     students.findByIdAndRemove(req.params.id, (err, deletedStudent) => {
+      
+//       if (!deletedStudent)
+//         res.send({ error: "Error in deleting!!!", deletedStudent: null });
+    
+//       else
+//         res.send({ error: "", deletedStudent });
+//     });
+//   }
+//   else{
+      
+//       res.send({ error: "Empty Request", deletedStudent: null });
+ 
+//   }
+// })
+ 
+
+/*  app.get ("/details/:index" , (req, res) =>{
+  res.render("details", {student: students.data[req.params.index]})
+});
+  */
