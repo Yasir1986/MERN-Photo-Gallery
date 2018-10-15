@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import './style.css'
 
-
 class Details extends Component {
   render() {
    const student = this.props.students[this.props.match.params.student]
-
- // console.log(this.props.match.params.student)
-
     return (
 
-      <div>
-          
+      <div> 
           <h2>Details</h2>
 
       {<img className="images"
@@ -29,13 +24,11 @@ class Details extends Component {
       <p>Joined On: {student.joinedOn} </p> 
         
         <p className="footer">  Copyright 2018 @ Y@$IR. All rights reserved </p>
-        
-
+     
       </div>
     );
   }
 }
-
 
 export default Details;
 
