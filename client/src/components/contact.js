@@ -6,10 +6,7 @@ class Contact extends Component {
     return (
      
         <div>
-
-            <h1>Contact Page</h1>
-
-
+           <h1>Contact Page</h1>
 <form method="POST">
 
 <label>Your First Name</label>
