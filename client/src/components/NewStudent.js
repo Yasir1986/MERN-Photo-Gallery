@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import './style.css';
 
-
 class NewStudent extends Component {
   render() {
     return (
       <div>
 
         <h2>Add New Students</h2>
-
          <form
          ref="uploadForm"
          id="uploadForm"
