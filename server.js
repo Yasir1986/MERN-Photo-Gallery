@@ -66,17 +66,12 @@ app.post("/addStudent", (req, res) => {
   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   let sampleFile = req.files.sampleFile;
  
-  // Use the mv() method to place the file somewhere on your server
-  // sampleFile.mv('\public\images' + req.firstName + ".jpg", function(err) 
   sampleFile.mv('./public/images/' + req.body.firstName + ".jpg" , function(err){
     if (err)
       return res.status(500).send(err);
-
-      //console.log("something")
        req.body.src =  req.body.firstName + ".jpg"
         req.body.alt =  req.body.firstName
-        //mongoose.students.push(req.body)
-        //console.log(mongoose.students)
+       
         
         newStudent.save().then(
           student => {
@@ -100,103 +95,3 @@ app.post("/addStudent", (req, res) => {
 
 app.listen(port, () => `Server is running on port ${port}`);
 
-
-
-
-
-
- //To add data in database
- /* const newStudents = [] 
-    students.collection.insertMany(newStudents, (err, myStudent) => {
-    if (!myStudent)
-      res.send({ error: "Error in requesting ID", myStudent: null });
-    else res.send({ error: "", myStudent });
-  }); */
-
-
-  // app.get('/students', (req, res) => {
-//   const Api = [
-//     {id: 1, firstName: 'John', lastName: 'Doe'},
-//     {id: 2, firstName: 'Brad', lastName: 'Traversy'},
-//     {id: 3, firstName: 'Mary', lastName: 'Swanson'},
-     
-//   ];
-
-//   res.json(Api);
-// });
-
-
-
-/* app.post("/contact" , (req, res) =>{
-
-  const adr = req.url;
-  const q = url.parse(adr, true);
-  const qdata = q.query;
-   console.log(qdata);
-  
-  const msg =
-    "<p>First name:" +
-    req.body.firstName + '\r\n </p>' +
-    "<p>last name:" +
-    req.body.lastName + '\r\n </p>'
-    +"<p>Email:" +
-    req.body.Email + '\r\n </p>'
-    + "<p>Message:" +
-    req.body.Message; '\r\n </p>'
-    console.log(msg);
-
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "yasir269050@gmail.com",
-        pass: "Pakistan0186"
-      }
-    });
- 
-    var mailOptions = {
-      from: "yasir269050@gmail.com",
-      to: "yasir269050@yahoo.com",
-      subject: "Sending Email using Express with user information submitted via form",
-      html: msg
-    };
- 
-    transporter.sendMail(mailOptions, function(error, info) {
-      if (error) {
-      //  res.write(error);
-        res.end();
-      } else {
-        res.write("Email sent. Thanks for your information. We will be back soon! :) " + info.response);
-        res.end();
-      }
-    });
-
-}); */
-
-
-//Find by Id and delete from API
-
-// app.get("/:id", (req,res) =>{
- 
-//    if (Object.keys(req.params).length) {
-   
-//     students.findByIdAndRemove(req.params.id, (err, deletedStudent) => {
-      
-//       if (!deletedStudent)
-//         res.send({ error: "Error in deleting!!!", deletedStudent: null });
-    
-//       else
-//         res.send({ error: "", deletedStudent });
-//     });
-//   }
-//   else{
-      
-//       res.send({ error: "Empty Request", deletedStudent: null });
- 
-//   }
-// })
- 
-
-/*  app.get ("/details/:index" , (req, res) =>{
-  res.render("details", {student: students.data[req.params.index]})
-});
-  */
